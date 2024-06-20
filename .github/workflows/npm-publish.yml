@@ -24,7 +24,9 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
-        run: npm publish --access public  # Replace with your publish command
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+          npm publish --access public  # Replace with your publish command
 
       - name: Cleanup
         run: npm clean
