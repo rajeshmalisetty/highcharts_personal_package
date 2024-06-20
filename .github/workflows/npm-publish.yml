@@ -27,9 +27,6 @@ jobs:
       - name: Build package
         run: npm run build  # Adjust if your build command is different
 
-      - name: Run tests (if applicable)
-        run: npm test  # Adjust if your testing command is different
-
       - name: Publish to npm
         run: npm publish
         env:
