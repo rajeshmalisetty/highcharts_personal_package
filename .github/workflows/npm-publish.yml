@@ -1,33 +1,30 @@
-name: Build and Publish
+name: Publish to npm
 
 on:
   push:
     branches:
-      - master  # or your default branch
-  pull_request:
-    branches:
-      - master  # or your default branch
+      - master
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust node version as needed
+          node-version: '14'
 
       - name: Install dependencies
         run: npm install
 
       - name: Build package
-        run: npm run build  # Adjust if your build command is different
+        run: npm run build
 
       - name: Publish to npm
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public  # Replace with your publish command
+
+      - name: Cleanup
+        run: npm clean
